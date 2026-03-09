@@ -90,7 +90,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r api_requirements.txt
           pip install pytest
-          pytest -q
+          pytest -q tests
 
   containerize:
     name: Container Build and Push
