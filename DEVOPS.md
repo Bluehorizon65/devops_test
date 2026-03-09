@@ -46,6 +46,9 @@ Artifacts:
 - `backend/Dockerfile`
 - `frontend/Dockerfile`
 - `AI/Dockerfile`
+- `pv_simulation/Dockerfile`
+- `satellite/Dockerfile`
+- `stl/Dockerfile`
 - `docker-compose.yml`
 - Kubernetes manifests in `deploy/k8s`
 

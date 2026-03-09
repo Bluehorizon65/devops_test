@@ -6,6 +6,8 @@
 - Backend: Render (Node.js web service)
 - Backend dependencies: set as environment variables (`CALCULATOR_API`, `SATELLITE_API`, `ROOFTOP_API`, `NEXT_API`)
 
+For local/full-stack demo, `docker compose up --build` runs all services (`frontend`, `backend`, `ai`, `satellite`, `pv-simulation`, `stl`) in one network.
+
 ## 1) Pre-deployment checks
 
 Run locally first:

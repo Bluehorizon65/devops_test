@@ -75,6 +75,15 @@ Detailed walkthrough: `DEVOPS.md`
 docker compose up --build
 ```
 
+This now starts the full stack end-to-end:
+
+- `frontend` (Vite + Nginx)
+- `backend` (Node proxy)
+- `ai` (rooftop detection)
+- `satellite` (satellite image service)
+- `pv-simulation` (solar calculator)
+- `stl` (3D model generation)
+
 ### Kubernetes Deploy
 
 ```bash

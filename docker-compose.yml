@@ -16,25 +16,54 @@ services:
       context: ./backend
     environment:
       PORT: 3000
-      CALCULATOR_API: http://host.docker.internal:8001/calculate
-      SATELLITE_API: http://host.docker.internal:8000/satellite
+      CALCULATOR_API: http://pv-simulation:8001/calculate
+      SATELLITE_API: http://satellite:8000/satellite
       ROOFTOP_API: http://ai:8005/detect-rooftop
-      NEXT_API: http://host.docker.internal:8007/generate-stl
+      NEXT_API: http://stl:8007/generate-stl/
       SATELLITE_FOLDER: /data/satellite_images
       OUTPUT_DIR: /data/output_images
     volumes:
-      - ./satellite:/data/satellite_images
-      - ./AI/output_images:/data/output_images
+      - satellite_images:/data/satellite_images
+      - output_images:/data/output_images
     ports:
       - "3000:3000"
     depends_on:
       - ai
+      - satellite
+      - pv-simulation
+      - stl
 
   ai:
     build:
       context: ./AI
+    volumes:
+      - output_images:/app/output_images
     ports:
       - "8005:8005"
+
+  satellite:
+    build:
+      context: ./satellite
+    volumes:
+      - satellite_images:/app/satellite_images
+    ports:
+      - "8000:8000"
+
+  pv-simulation:
+    build:
+      context: ./pv_simulation
+    ports:
+      - "8001:8001"
+
+  stl:
+    build:
+      context: ./stl
+    ports:
+      - "8007:8007"
+
+volumes:
+  satellite_images:
+  output_images:
 
 networks:
   default:
