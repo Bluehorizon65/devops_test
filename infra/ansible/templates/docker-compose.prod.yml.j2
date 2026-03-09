@@ -1,0 +1,40 @@
+version: "3.9"
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        VITE_API_BASE_URL: /api
+    ports:
+      - "{{ frontend_port }}:80"
+    depends_on:
+      - backend
+
+  backend:
+    build:
+      context: ./backend
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      PORT: {{ backend_port }}
+      CALCULATOR_API: {{ calculator_api }}
+      SATELLITE_API: {{ satellite_api }}
+      ROOFTOP_API: {{ rooftop_api }}
+      NEXT_API: {{ next_api }}
+      SATELLITE_FOLDER: /data/satellite_images
+      OUTPUT_DIR: /data/output_images
+      CORS_ORIGIN: {{ cors_origin }}
+    volumes:
+      - ./satellite:/data/satellite_images
+      - ./AI/output_images:/data/output_images
+    ports:
+      - "{{ backend_port }}:{{ backend_port }}"
+    depends_on:
+      - ai
+
+  ai:
+    build:
+      context: ./AI
+    ports:
+      - "{{ ai_port }}:8005"

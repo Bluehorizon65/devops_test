@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: solar-scope-config
+  namespace: solar-scope
+data:
+  CALCULATOR_API: "http://host.docker.internal:8001/calculate"
+  SATELLITE_API: "http://host.docker.internal:8000/satellite"
+  ROOFTOP_API: "http://ai-service:8005/detect-rooftop"
+  NEXT_API: "http://host.docker.internal:8007/generate-stl"
+  SATELLITE_FOLDER: "/data/satellite_images"
+  OUTPUT_DIR: "/data/output_images"

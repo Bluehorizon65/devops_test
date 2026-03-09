@@ -1,0 +1,12 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: solar-scope
+resources:
+  - ../../base
+images:
+  - name: ghcr.io/owner/repo/frontend
+    newTag: latest
+  - name: ghcr.io/owner/repo/backend
+    newTag: latest
+  - name: ghcr.io/owner/repo/ai
+    newTag: latest

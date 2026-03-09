@@ -1,0 +1,14 @@
+.git
+.gitignore
+**/__pycache__
+**/*.pyc
+**/node_modules
+**/.pytest_cache
+**/.mypy_cache
+**/.DS_Store
+**/dist
+**/build
+AI/output_images
+satellite/satellite_images
+infra/.terraform
+infra/terraform.tfstate*

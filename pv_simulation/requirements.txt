@@ -1,0 +1,46 @@
+# Indian PV System Energy Calculator v2.0 - Requirements
+# =====================================================
+
+# Core FastAPI Framework & Web Server
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+pydantic==2.5.0
+python-multipart==0.0.6
+
+# Data Processing & Analysis
+pandas==2.1.3
+numpy==1.25.2
+
+# Solar Energy Modeling (pvlib-python)
+pvlib==0.10.2
+
+# HTTP Requests & API Communication
+requests==2.31.0
+
+# Date/Time Handling
+python-dateutil==2.8.2
+
+# AI Integration (Google Gemini)
+google-genai==0.3.0
+
+# PDF Generation
+reportlab==4.0.7
+
+# Data Visualization
+matplotlib==3.8.2
+seaborn==0.13.0
+plotly==5.17.0
+
+# Optional: Development & Testing
+pytest==7.4.3
+pytest-asyncio==0.21.1
+
+# Optional: Jupyter Notebooks for Analysis
+jupyter==1.0.0
+ipykernel==6.26.0
+
+# System Requirements:
+# - Python >= 3.8
+# - Operating System: Windows/Linux/macOS  
+# - Memory: 4GB RAM minimum, 8GB recommended
+# - Storage: 500MB for dependencies + data files

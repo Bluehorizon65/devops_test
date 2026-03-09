@@ -1,0 +1,28 @@
+services:
+  - type: web
+    name: solar-scope-backend
+    runtime: node
+    rootDir: backend
+    plan: free
+    buildCommand: npm ci
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_VERSION
+        value: 20
+      - key: PORT
+        value: 3000
+      - key: CALCULATOR_API
+        sync: false
+      - key: SATELLITE_API
+        sync: false
+      - key: ROOFTOP_API
+        sync: false
+      - key: NEXT_API
+        sync: false
+      - key: SATELLITE_FOLDER
+        value: /opt/render/project/src/satellite_images
+      - key: OUTPUT_DIR
+        value: /opt/render/project/src/output_images
+      - key: CORS_ORIGIN
+        sync: false

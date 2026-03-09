@@ -1,0 +1,6 @@
+flask
+fastapi
+trimesh
+numpy
+requests
+plotly

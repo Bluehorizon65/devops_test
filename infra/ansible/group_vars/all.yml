@@ -1,0 +1,19 @@
+app_name: solar-scope
+app_root: /opt/solar-scope
+app_repo: "https://github.com/Bluehorizon65/google_hackathon.git"
+app_branch: main
+compose_file: docker-compose.yml
+
+# Ports exposed by the VM deployment.
+frontend_port: 80
+backend_port: 3000
+ai_port: 8005
+
+# External dependency endpoints used by backend service.
+calculator_api: "http://host.docker.internal:8001/calculate"
+satellite_api: "http://host.docker.internal:8000/satellite"
+rooftop_api: "http://ai:8005/detect-rooftop"
+next_api: "http://host.docker.internal:8007/generate-stl"
+
+# CORS origins (comma-separated) for browser clients.
+cors_origin: "http://localhost:5173,https://your-site.netlify.app"

@@ -1,0 +1,9 @@
+AI/output_images/*
+satellite/satellite_images/*
+__pycache__/
+node_modules/
+frontend/dist/
+infra/terraform/.terraform/
+infra/terraform/*.tfstate
+infra/terraform/*.tfstate.backup
+infra/terraform/.terraform.lock.hcl

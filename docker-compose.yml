@@ -1,0 +1,41 @@
+version: "3.9"
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        VITE_API_BASE_URL: /api
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+
+  backend:
+    build:
+      context: ./backend
+    environment:
+      PORT: 3000
+      CALCULATOR_API: http://host.docker.internal:8001/calculate
+      SATELLITE_API: http://host.docker.internal:8000/satellite
+      ROOFTOP_API: http://ai:8005/detect-rooftop
+      NEXT_API: http://host.docker.internal:8007/generate-stl
+      SATELLITE_FOLDER: /data/satellite_images
+      OUTPUT_DIR: /data/output_images
+    volumes:
+      - ./satellite:/data/satellite_images
+      - ./AI/output_images:/data/output_images
+    ports:
+      - "3000:3000"
+    depends_on:
+      - ai
+
+  ai:
+    build:
+      context: ./AI
+    ports:
+      - "8005:8005"
+
+networks:
+  default:
+    name: solar-scope-net

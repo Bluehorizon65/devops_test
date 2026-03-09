@@ -1,0 +1,44 @@
+---
+- name: Deploy Solar Scope with Docker Compose
+  hosts: app_servers
+  become: true
+
+  tasks:
+    - name: Clone or update application repository
+      ansible.builtin.git:
+        repo: "{{ app_repo }}"
+        dest: "{{ app_root }}"
+        version: "{{ app_branch }}"
+        force: true
+
+    - name: Render production docker-compose file
+      ansible.builtin.template:
+        src: ../templates/docker-compose.prod.yml.j2
+        dest: "{{ app_root }}/docker-compose.prod.yml"
+        mode: "0644"
+
+    - name: Ensure output directories exist
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: directory
+        mode: "0755"
+      loop:
+        - "{{ app_root }}/AI/output_images"
+        - "{{ app_root }}/satellite"
+
+    - name: Build and start services
+      community.docker.docker_compose_v2:
+        project_src: "{{ app_root }}"
+        files:
+          - docker-compose.prod.yml
+        state: present
+        build: always
+
+    - name: Show running containers
+      ansible.builtin.command: docker ps --format "table {{ '{{' }}.Names{{ '}}' }}\t{{ '{{' }}.Status{{ '}}' }}\t{{ '{{' }}.Ports{{ '}}' }}"
+      register: docker_ps_output
+      changed_when: false
+
+    - name: Print running containers
+      ansible.builtin.debug:
+        var: docker_ps_output.stdout_lines

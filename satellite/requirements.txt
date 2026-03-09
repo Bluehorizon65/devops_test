@@ -1,0 +1,56 @@
+# Satellite Zoom Server - Requirements
+# ====================================
+
+# Core FastAPI Framework & Web Server
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+pydantic==2.5.0
+
+# HTTP Requests & API Communication
+requests==2.31.0
+
+# Image Processing & Manipulation
+Pillow==10.1.0
+
+# UUID Generation (built-in, but explicit for clarity)
+# uuid - Built into Python standard library
+
+# Date/Time Handling (built-in)
+# datetime - Built into Python standard library
+
+# File Operations (built-in)
+# os - Built into Python standard library
+
+# Mathematical Operations (built-in)
+# math - Built into Python standard library
+
+# Type Hints (built-in in Python 3.8+)
+# typing - Built into Python standard library
+
+# Optional: Development & Testing
+pytest==7.4.3
+pytest-asyncio==0.21.1
+
+# System Requirements:
+# - Python >= 3.7
+# - Operating System: Windows/Linux/macOS
+# - Memory: 2GB RAM minimum, 4GB recommended  
+# - Storage: 100MB for dependencies + image storage
+# - Internet: Required for Google Satellite API access
+
+# Installation:
+# pip install -r requirements.txt
+
+# Usage:
+# python satellite_zoom_server.py
+
+# Key Dependencies Explained:
+# - fastapi: Modern web framework for building APIs
+# - uvicorn: ASGI server for running FastAPI applications
+# - pydantic: Data validation using Python type annotations
+# - requests: HTTP library for downloading satellite tiles
+# - pillow: Python Imaging Library for image processing and tile stitching
+
+# Optional Development Tools:
+# - pytest: Testing framework for unit tests
+# - pytest-asyncio: Testing support for async functions

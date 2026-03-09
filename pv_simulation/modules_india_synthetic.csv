@@ -1,0 +1,61 @@
+model,manufacturer,technology,pdc0_W,Voc_V,Isc_A,Vmp_V,Imp_A,eff_percent,cells
+Longi_144_cell_370W_1,Longi,Polycrystalline,370,51.96,12.19,31.74,11.66,17.17,144_cell
+Sharp_72_cell_415W_2,Sharp,HJT,415,49.53,8.39,45.33,9.16,23.04,72_cell
+Adani_72_cell_585W_3,Adani,Polycrystalline,585,45.74,11.02,34.99,16.72,20.59,72_cell
+Qcells_60_cell_570W_4,Qcells,Bifacial,570,59.5,11.27,48.64,11.72,21.1,60_cell
+Longi_72_cell_315W_5,Longi,TOPCon,315,58.27,11.94,37.25,8.46,16.12,72_cell
+First_Solar_72_cell_650W_6,First_Solar,Polycrystalline,650,48.3,13.83,32.16,20.21,18.93,72_cell
+REC_72_cell_305W_7,REC,Polycrystalline,305,42.75,9.46,41.62,7.33,16.23,72_cell
+LG_132_cell_665W_8,LG,TOPCon,665,56.84,12.19,50.12,13.27,16.66,132_cell
+REC_132_cell_695W_9,REC,HJT,695,52.42,11.78,42.08,16.52,23.24,132_cell
+JA_Solar_132_cell_440W_10,JA_Solar,Monocrystalline PERC,440,54.07,8.52,51.69,8.51,21.79,132_cell
+REC_72_cell_700W_11,REC,Bifacial,700,51.34,13.53,42.54,16.46,22.95,72_cell
+Canadian_Solar_120_cell_330W_12,Canadian_Solar,Polycrystalline,330,55.5,11.15,30.29,10.89,18.78,120_cell
+Vikram_72_cell_470W_13,Vikram,Polycrystalline,470,44.17,8.84,45.12,10.42,21.71,72_cell
+Risen_60_cell_340W_14,Risen,Bifacial,340,51.32,8.78,38.54,8.82,17.51,60_cell
+Tata_144_cell_410W_15,Tata,HJT,410,48.13,11.78,32.87,12.47,23.07,144_cell
+Waaree_132_cell_520W_16,Waaree,TOPCon,520,38.87,8.74,38.96,13.35,17.64,132_cell
+Sharp_60_cell_605W_17,Sharp,TOPCon,605,33.3,9.6,38.25,15.82,22.14,60_cell
+Vikram_144_cell_340W_18,Vikram,Bifacial,340,44.54,12.85,34.47,9.86,17.83,144_cell
+Canadian_Solar_60_cell_605W_19,Canadian_Solar,Polycrystalline,605,59.15,14.74,34.04,17.77,19.73,60_cell
+Jinko_120_cell_575W_20,Jinko,Monocrystalline PERC,575,31.11,12.27,40.06,14.35,16.39,120_cell
+Adani_132_cell_390W_21,Adani,Monocrystalline PERC,390,50.42,11.72,38.75,10.06,20.15,132_cell
+Sharp_144_cell_380W_22,Sharp,Bifacial,380,51.85,10.57,43.18,8.8,20.75,144_cell
+Qcells_144_cell_660W_23,Qcells,Monocrystalline PERC,660,39.62,9.31,28.98,22.77,20.43,144_cell
+Tata_72_cell_630W_24,Tata,Bifacial,630,54.29,10.44,30.31,20.79,23.05,72_cell
+REC_144_cell_350W_25,REC,Monocrystalline PERC,350,40.23,8.79,50.19,6.97,22.58,144_cell
+Longi_132_cell_375W_26,Longi,Polycrystalline,375,54.52,11.89,40.71,9.21,17.81,132_cell
+Jinko_144_cell_455W_27,Jinko,HJT,455,48.99,10.37,36.38,12.51,21.44,144_cell
+Adani_60_cell_670W_28,Adani,Polycrystalline,670,58.07,13.5,44.06,15.21,20.36,60_cell
+Vikram_60_cell_385W_29,Vikram,Monocrystalline PERC,385,34.82,11.84,44.61,8.63,20.89,60_cell
+Tata_144_cell_635W_30,Tata,Monocrystalline PERC,635,37.12,10.28,45.92,13.83,20.87,144_cell
+Seraphim_120_cell_535W_31,Seraphim,Monocrystalline PERC,535,32.81,10.57,34.36,15.57,17.83,120_cell
+REC_120_cell_430W_32,REC,Bifacial,430,53.84,11.52,41.85,10.27,19.69,120_cell
+Qcells_120_cell_315W_33,Qcells,Bifacial,315,30.73,12.52,32.25,9.77,23.05,120_cell
+Risen_120_cell_325W_34,Risen,HJT,325,41.1,8.11,50.28,6.46,19.21,120_cell
+Vikram_72_cell_610W_35,Vikram,Polycrystalline,610,39.17,9.34,34.44,17.71,19.64,72_cell
+Panasonic_72_cell_630W_36,Panasonic,TOPCon,630,47.1,8.68,42.76,14.73,23.43,72_cell
+Panasonic_72_cell_380W_37,Panasonic,TOPCon,380,55.46,8.96,45.01,8.44,20.15,72_cell
+Vikram_132_cell_420W_38,Vikram,TOPCon,420,48.35,8.57,28.12,14.94,20.71,132_cell
+Adani_60_cell_370W_39,Adani,Polycrystalline,370,41.27,8.66,41.88,8.83,16.27,60_cell
+Seraphim_120_cell_505W_40,Seraphim,Polycrystalline,505,54.68,10.52,31.05,16.26,19.92,120_cell
+LG_144_cell_320W_41,LG,Polycrystalline,320,43.72,13.89,32.67,9.79,19.09,144_cell
+REC_144_cell_375W_42,REC,Polycrystalline,375,59.28,11.61,35.75,10.49,21.96,144_cell
+Jinko_60_cell_605W_43,Jinko,TOPCon,605,55.08,12.87,37.81,16.0,17.3,60_cell
+First_Solar_120_cell_535W_44,First_Solar,TOPCon,535,35.49,14.54,43.32,12.35,19.88,120_cell
+Vikram_120_cell_425W_45,Vikram,Polycrystalline,425,40.68,13.3,28.35,14.99,16.87,120_cell
+First_Solar_132_cell_605W_46,First_Solar,Monocrystalline PERC,605,51.11,11.32,30.35,19.93,19.69,132_cell
+Adani_72_cell_410W_47,Adani,HJT,410,31.44,14.64,49.28,8.32,17.96,72_cell
+Adani_144_cell_315W_48,Adani,HJT,315,48.48,14.61,50.66,6.22,22.5,144_cell
+LG_144_cell_470W_49,LG,TOPCon,470,49.3,11.21,41.09,11.44,23.06,144_cell
+Adani_72_cell_495W_50,Adani,Monocrystalline PERC,495,57.16,9.37,29.66,16.69,16.76,72_cell
+HT_Solar_144_cell_700W_51,HT_Solar,Bifacial,700,49.67,10.7,44.36,15.78,18.55,144_cell
+Canadian_Solar_120_cell_585W_52,Canadian_Solar,Polycrystalline,585,50.9,12.4,49.06,11.92,21.51,120_cell
+Tata_60_cell_660W_53,Tata,TOPCon,660,47.06,12.03,45.56,14.49,16.96,60_cell
+Longi_60_cell_355W_54,Longi,HJT,355,42.87,13.26,46.11,7.7,16.77,60_cell
+Seraphim_132_cell_360W_55,Seraphim,Polycrystalline,360,56.87,10.72,28.26,12.74,22.79,132_cell
+Canadian_Solar_120_cell_685W_56,Canadian_Solar,Polycrystalline,685,50.3,11.38,39.83,17.2,16.62,120_cell
+Vikram_120_cell_420W_57,Vikram,Polycrystalline,420,46.61,9.49,50.71,8.28,21.86,120_cell
+Panasonic_144_cell_490W_58,Panasonic,TOPCon,490,59.88,8.39,45.69,10.72,20.09,144_cell
+HT_Solar_120_cell_340W_59,HT_Solar,Polycrystalline,340,52.85,12.33,30.43,11.17,16.63,120_cell
+REC_144_cell_340W_60,REC,TOPCon,340,54.66,12.94,29.95,11.35,16.64,144_cell
