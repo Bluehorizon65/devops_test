@@ -1,0 +1,33 @@
+#!/bin/bash
+set -euxo pipefail
+
+exec > /var/log/solar-scope-bootstrap.log 2>&1
+
+apt-get update -y
+apt-get install -y ca-certificates curl gnupg lsb-release git
+
+install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+chmod a+r /etc/apt/keyrings/docker.gpg
+
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+  $(. /etc/os-release && echo \"$VERSION_CODENAME\") stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+apt-get update -y
+apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+usermod -aG docker ubuntu || true
+
+mkdir -p ${project_dir}
+if [ ! -d "${project_dir}/.git" ]; then
+  git clone --branch ${repo_branch} ${repo_url} ${project_dir}
+else
+  cd ${project_dir}
+  git fetch --all --prune
+  git checkout ${repo_branch}
+  git pull origin ${repo_branch}
+fi
+
+cd ${project_dir}
+/usr/bin/docker compose up -d --build

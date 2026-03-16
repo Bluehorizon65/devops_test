@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import App from './App'
 import Preview from './preview/Preview'
+import ModelViewer from './preview/ModelViewer'
 import './styles.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-icons/font/bootstrap-icons.css'
@@ -30,6 +31,7 @@ createRoot(document.getElementById('root')).render(
       <Routes>
         <Route path="/" element={<App/>} />
         <Route path="/preview" element={<Preview/>} />
+        <Route path="/model" element={<ModelViewer/>} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

@@ -2,6 +2,12 @@ import React, { useState } from 'react'
 
 export default function SolarResults({ data }) {
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000'
+  const MODEL_SERVER_URL = import.meta.env.VITE_MODEL_SERVER_URL || 'http://localhost:8007/docs'
+  const AI_SERVER_URL = import.meta.env.VITE_AI_SERVER_URL || 'http://localhost:8005/docs'
+  const MODEL_OUTPUT_URL = data?.stl_model_url ? `${API_BASE_URL}${data.stl_model_url}` : null
+  const MODEL_VIEW_PAGE = MODEL_OUTPUT_URL
+    ? `/model?url=${encodeURIComponent(MODEL_OUTPUT_URL)}`
+    : null
   const [activeTab, setActiveTab] = useState('overview')
 
   if (!data || !data.success) {
@@ -55,6 +61,13 @@ export default function SolarResults({ data }) {
       </div>
 
       <div className="card-body p-0">
+        {data.warning && (
+          <div className="alert alert-warning m-3 mb-0" role="alert">
+            <i className="bi bi-exclamation-triangle me-2"></i>
+            {data.warning}
+          </div>
+        )}
+
         {/* Tab Navigation */}
         <div className="p-3 border-bottom">
           <div className="d-flex gap-2 flex-wrap">
@@ -559,10 +572,10 @@ export default function SolarResults({ data }) {
                           <div className="small text-muted">Filename</div>
                           <div className="fw-medium font-monospace small">{satellite.filename}</div>
                         </div>
-                        {satellite.file_url && (
+                        {(satellite.preview_url || satellite.download_url || satellite.file_url) && (
                           <div className="col-12">
                             <a 
-                              href={`file:///C:/Users/Enemb/OneDrive/Documents/google_hackathon_AI/output_images/${satellite.filename}`}
+                              href={`${API_BASE_URL}${satellite.download_url || satellite.preview_url || satellite.file_url}`}
                               target="_blank" 
                               rel="noopener noreferrer"
                               className="btn btn-outline-primary btn-sm"
@@ -640,7 +653,7 @@ export default function SolarResults({ data }) {
                 </div>
               </div>
 
-              {satellite && satellite.file_url && (
+              {satellite && (satellite.preview_url || satellite.download_url || satellite.file_url) && (
                 <div className="col-12">
                   <div className="card">
                     <div className="card-header">
@@ -651,15 +664,15 @@ export default function SolarResults({ data }) {
                     </div>
                     <div className="card-body text-center">
                       <img
-  src={`${API_BASE_URL}/output_images/${satellite.filename}`}
-  alt="Satellite view of location"
-  className="img-fluid rounded shadow-sm"
-  style={{ maxHeight: '400px' }}
-  onError={(e) => {
-    e.target.style.display = 'none';
-    e.target.nextSibling.style.display = 'block';
-  }}
-/>
+                        src={`${API_BASE_URL}${satellite.preview_url || satellite.download_url || satellite.file_url}`}
+                        alt="Satellite view of location"
+                        className="img-fluid rounded shadow-sm"
+                        style={{ maxHeight: '400px' }}
+                        onError={(e) => {
+                          e.target.style.display = 'none';
+                          e.target.nextSibling.style.display = 'block';
+                        }}
+                      />
 
                       <div style={{ display: 'none' }} className="text-muted">
                         <i className="bi bi-exclamation-triangle mb-2" style={{ fontSize: '2rem' }}></i>
@@ -672,13 +685,34 @@ export default function SolarResults({ data }) {
 
               <div className="col-12 mt-4 text-center">
                 <a 
-                  href="http://127.0.0.1:5000/"
+                  href={MODEL_VIEW_PAGE || '#'}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn btn-primary"
+                  className={`btn ${MODEL_VIEW_PAGE ? 'btn-primary' : 'btn-secondary disabled'}`}
+                  onClick={(e) => {
+                    if (!MODEL_VIEW_PAGE) e.preventDefault()
+                  }}
                 >
                   <i className="bi bi-robot me-2"></i>
-                  Open ML Model Server
+                  {data?.stl_model_url ? 'Open 3D Model Viewer' : '3D Model Unavailable (Demo Mode)'}
+                </a>
+                <a
+                  href={MODEL_SERVER_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-outline-secondary ms-2"
+                >
+                  <i className="bi bi-box me-2"></i>
+                  Open STL API Docs
+                </a>
+                <a
+                  href={AI_SERVER_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-outline-secondary ms-2 mt-2 mt-sm-0"
+                >
+                  <i className="bi bi-cpu me-2"></i>
+                  Open Rooftop AI Docs
                 </a>
               </div>
             </div>

@@ -5,6 +5,11 @@ WORKDIR /app
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
+# OpenCV in headless containers still requires these shared libraries.
+RUN apt-get update \
+	&& apt-get install -y --no-install-recommends libgl1 libglib2.0-0 \
+	&& rm -rf /var/lib/apt/lists/*
+
 COPY api_requirements.txt ./
 RUN pip install --no-cache-dir -r api_requirements.txt
 

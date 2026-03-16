@@ -30,6 +30,7 @@ export function createApp() {
   );
   app.use(express.json());
   app.use("/output_images", express.static(outputDir));
+  app.use("/satellite_images", express.static(satelliteFolder));
 
   app.get("/", (req, res) => {
     res.json({
@@ -40,6 +41,18 @@ export function createApp() {
 
   app.get("/health", (req, res) => {
     res.json({ status: "ok", service: "backend", uptime: process.uptime() });
+  });
+
+  // Frontend map picker posts selected coordinates here as a lightweight ping.
+  app.post("/location", (req, res) => {
+    const { lat, lon } = req.body || {};
+    return res.status(200).json({
+      success: true,
+      location: {
+        lat,
+        lon,
+      },
+    });
   });
 
   app.post("/solar", async (req, res) => {
@@ -79,33 +92,80 @@ export function createApp() {
         return res.status(404).json({ detail: "No images found in satellite_images folder" });
       }
 
-      const savedImagePath = path.join(satelliteFolder, imageFiles[0]);
+      const preferredImageFile = satelliteResponse?.data?.filename;
+      const fallbackImageFile = imageFiles[0];
+      const selectedImageFile = preferredImageFile && imageFiles.includes(preferredImageFile)
+        ? preferredImageFile
+        : fallbackImageFile;
+      const savedImagePath = path.join(satelliteFolder, selectedImageFile);
 
       const rooftopPayload = {
         image_path: savedImagePath,
         num_panels: calcResponse.data.system_configuration.modules_count,
       };
 
-      const rooftopResponse = await axios.post(rooftopApi, rooftopPayload, {
-        headers: { "Content-Type": "application/json" },
-      });
+      const satelliteResult = {
+        ...satelliteResponse.data,
+        preview_url: `/satellite_images/${selectedImageFile}`,
+        download_url: `/satellite_images/${selectedImageFile}`,
+      };
 
-      await axios.post(nextApi, null, {
-        params: {
-          roof_length: rooftopResponse.data.length,
-          roof_width: rooftopResponse.data.width,
-          num_panels: calcResponse.data.system_configuration.modules_count,
-          tilt_angle: calcResponse.data.system_configuration.tilt_degrees,
-        },
-      });
+      let rooftopResult = null;
+      const warnings = [];
+      let stlModelUrl = null;
+
+      try {
+        const rooftopResponse = await axios.post(rooftopApi, rooftopPayload, {
+          headers: { "Content-Type": "application/json" },
+        });
+
+        rooftopResult = {
+          success: true,
+          ...rooftopResponse.data,
+          file_url: rooftopResponse.data?.image_location
+            ? `/output_images/${path.basename(rooftopResponse.data.image_location)}`
+            : null,
+        };
+
+        try {
+          const stlResponse = await axios.post(nextApi, null, {
+            params: {
+              roof_length: rooftopResponse.data.length,
+              roof_width: rooftopResponse.data.width,
+              num_panels: calcResponse.data.system_configuration.modules_count,
+              tilt_angle: calcResponse.data.system_configuration.tilt_degrees,
+            },
+            responseType: "arraybuffer",
+          });
+
+          const modelFileName = `model_${Date.now()}.glb`;
+          const modelFilePath = path.join(outputDir, modelFileName);
+          fs.writeFileSync(modelFilePath, Buffer.from(stlResponse.data));
+          stlModelUrl = `/output_images/${modelFileName}`;
+        } catch (stlError) {
+          warnings.push("3D model generation service is currently unavailable.");
+        }
+      } catch (rooftopError) {
+        if (rooftopError.response?.status === 404) {
+          warnings.push("Rooftop detection did not find a valid roof area for this image.");
+          rooftopResult = {
+            success: false,
+            detail: rooftopError.response?.data?.detail || "No rooftops detected in the image",
+          };
+        } else {
+          throw rooftopError;
+        }
+      }
 
       return res.status(200).json({
         success: true,
         message:
           "Combined response from Solar Calculator, Satellite API, Rooftop Detection, and Next API",
+        warning: warnings.length ? warnings.join(" ") : null,
         calculator_result: calcResponse.data,
-        satellite_result: satelliteResponse.data,
-        rooftop_result: rooftopResponse.data,
+        satellite_result: satelliteResult,
+        rooftop_result: rooftopResult,
+        stl_model_url: stlModelUrl,
       });
     } catch (error) {
       if (error.response) {

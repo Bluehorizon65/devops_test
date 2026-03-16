@@ -83,9 +83,9 @@ ansible-playbook playbooks/provision.yml
 ansible-playbook playbooks/deploy.yml
 ```
 
-Optional legacy path:
+Additional cloud path:
 
-- `infra/terraform` is still available as an optional Azure example, but not required.
+- `infra/terraform/aws` provides AWS IaC (EC2 + Docker Compose bootstrap), suitable for Free Tier demo deployment.
 
 ## Presentation Tips
 

@@ -106,3 +106,45 @@ This gives you a fully code-driven infra+deploy workflow without Azure.
 
 - Render: Deploys -> choose previous deploy -> Redeploy.
 - Netlify: Deploys -> Publish previous successful deploy.
+
+## 9) Deploy on AWS with Terraform
+
+Use `infra/terraform/aws` to provision an EC2 VM and automatically run full-stack Docker Compose.
+
+1. Ensure AWS credentials are configured locally:
+
+```bash
+aws configure
+```
+
+2. Prepare Terraform variables:
+
+```bash
+cd infra/terraform/aws
+cp terraform.tfvars.example terraform.tfvars
+```
+
+3. Edit `terraform.tfvars`:
+
+- Set `ssh_key_name` to an existing EC2 key pair name in your region.
+- Use `instance_type = "t3.medium"` for reliable full-stack runtime.
+
+4. Deploy:
+
+```bash
+terraform init
+terraform plan
+terraform apply
+```
+
+5. Use outputs:
+
+- `frontend_url` -> open app in browser
+- `backend_health_url` -> verify backend
+- `ssh_command` -> SSH into the instance
+
+6. Destroy when done:
+
+```bash
+terraform destroy
+```

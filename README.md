@@ -67,6 +67,8 @@ This repository now includes complete DevOps artifacts for project evaluation:
 
 Detailed walkthrough: `DEVOPS.md`
 
+Rubric/demo proof checklist: `RUBRIC_EVIDENCE.md`
+
 ## Quick DevOps Commands
 
 ### Docker Compose
@@ -97,4 +99,16 @@ cd infra/ansible
 ansible-playbook playbooks/provision.yml
 ansible-playbook playbooks/deploy.yml
 ```
+
+### Terraform on AWS
+
+```bash
+cd infra/terraform/aws
+cp terraform.tfvars.example terraform.tfvars
+# edit terraform.tfvars and set ssh_key_name
+terraform init
+terraform apply
+```
+
+Detailed AWS instructions: `infra/terraform/aws/README.md`
 

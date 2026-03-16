@@ -1,0 +1,10 @@
+aws_region          = "ap-south-1"
+project_name        = "solar-scope"
+environment         = "dev"
+instance_type       = "t3.medium"
+allowed_cidr        = "0.0.0.0/0"
+ssh_key_name        = "your-ec2-keypair-name"
+repo_url            = "https://github.com/Bluehorizon65/devops_test.git"
+repo_branch         = "main"
+project_dir         = "/opt/solar-scope"
+expose_service_ports = false
